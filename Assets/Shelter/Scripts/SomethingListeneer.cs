@@ -202,4 +202,8 @@ public class SomethingListeneer : MonoBehaviour {
         }
         lastState = currentState;
 	}
+
+    public void OnConnected(NetworkMessage netMsg) {
+        Debug.Log("Connected to server");
+    }
 }
