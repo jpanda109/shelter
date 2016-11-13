@@ -2,3 +2,5 @@ Temp
 .vs
 Library
 Assets/AssetStoreTools*
+*.exe
+test_Data
