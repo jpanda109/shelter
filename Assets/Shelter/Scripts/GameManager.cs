@@ -7,19 +7,28 @@ public class GameManager : MonoBehaviour
 {
 
     // Use this for initialization
-    private string[] dictionary = new string[7] { "Pizza", "Squirrel", "Acorn", "Hack", "House", "Dog", "Tree" };
+
     NetworkClient myClient;
-    GameObject infield;
+    InputField infield;
     Text testText;
+    Text clock;
+
+    double timer;
+
     void Start()
     {
-        infield = GameObject.FindWithTag("Input");
-        Debug.Log("hello");
-        Debug.Log(infield.name);
+        timer = 0.0;
+        infield = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
+        infield.onEndEdit.AddListener(submitName);
         myClient = new NetworkClient();
         myClient.RegisterHandler(MyMessageType.Shape, OnShapeMessage);
         myClient.Connect("10.66.175.175", 4444);
         testText = GameObject.FindGameObjectWithTag("TestText").GetComponent<Text>();
+    }
+
+    private void submitName(string guess)
+    {
+        Debug.Log(guess);
     }
 
     void OnShapeMessage(NetworkMessage networkMessage) {
@@ -34,5 +43,9 @@ public class GameManager : MonoBehaviour
         if (testText.text == "New Text" && myClient.isConnected) {
             testText.text = "connected!";
         }
+
+        timer += Time.deltaTime;
+
+
     }
 }
