@@ -41,8 +41,14 @@ public class SomethingListeneer : MonoBehaviour {
     Text colorText;
     int rotationIndex = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+
+    string[] dictionary = new string[7] { "Pizza", "Squirrel", "Acorn", "Hack", "House", "Dog", "Tree" };
+    public Text word;
+
+    void Start () {
+        word.text = "Currently creating: " + dictionary[UnityEngine.Random.Range(0, 6)];
+
         provider = FindObjectOfType<LeapProvider>() as LeapProvider;
         modeText = GameObject.FindWithTag("ModeText").GetComponent<Text>();
         selectedText = GameObject.FindWithTag("SelectedText").GetComponent<Text>();
