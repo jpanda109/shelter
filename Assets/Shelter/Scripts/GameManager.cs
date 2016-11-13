@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private string[] dictionary = new string[7] { "Pizza", "Squirrel", "Acorn", "Hack", "House", "Dog", "Tree" };
     NetworkClient myClient;
-    GameObject infield = GameObject.FindWithTag("Input");
+    GameObject infield;
     Text testText;
     void Start()
     {
+        infield = GameObject.FindWithTag("Input");
         Debug.Log("hello");
         Debug.Log(infield.name);
         myClient = new NetworkClient();
