@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelterUnity.CSharp", "ShelterUnity.CSharp.csproj", "{415D3607-FF66-584E-4058-E76EE9B4EAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShelterUnity.CSharp.Editor", "ShelterUnity.CSharp.Editor.csproj", "{58A12ADC-ED21-6133-C94B-94028982724A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{415D3607-FF66-584E-4058-E76EE9B4EAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415D3607-FF66-584E-4058-E76EE9B4EAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415D3607-FF66-584E-4058-E76EE9B4EAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415D3607-FF66-584E-4058-E76EE9B4EAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A12ADC-ED21-6133-C94B-94028982724A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A12ADC-ED21-6133-C94B-94028982724A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A12ADC-ED21-6133-C94B-94028982724A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A12ADC-ED21-6133-C94B-94028982724A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
