@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         myClient.RegisterHandler(MyMessageType.Shape, OnShapeMessage);
         myClient.Connect("10.66.175.175", 4444);
         testText = GameObject.FindGameObjectWithTag("TestText").GetComponent<Text>();
-        NetworkServer.RegisterHandler(MyMessageType.Result, onResult);
+        myClient.RegisterHandler(MyMessageType.Result, onResult);
     }
 
     void onResult (NetworkMessage result)
@@ -46,10 +46,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowMessage (string message, float delay)
     {
-        GetComponent<GUIText>().text = message;
-        GetComponent<GUIText>().enabled = true;
+        Text go = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Text>();
+        go.text = message;
+        go.enabled = true;
         yield return new WaitForSeconds(delay);
-        GetComponent<GUIText>().enabled = false;
+        go.enabled = false;
     }
 
     private void submitName(string guess)
