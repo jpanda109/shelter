@@ -6,6 +6,7 @@ using Leap;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 
 public struct Coord {
     public double x;
@@ -15,6 +16,7 @@ public struct Coord {
 
 public class MyMessageType {
     public static short Shape = MsgType.Highest + 1;
+    public static short String = MsgType.Highest + 2;
 }
 
 public class ShapeMessage : MessageBase {
@@ -29,6 +31,7 @@ public class SomethingListeneer : MonoBehaviour {
     public Transform block;
     public Transform cylinder;
     public Transform sphere;
+    string selectedShape = "block";
     int lastState = 0;
     int currentState = 0;
     Transform curBlock;
@@ -57,12 +60,18 @@ public class SomethingListeneer : MonoBehaviour {
         colorText = GameObject.FindWithTag("ColorText").GetComponent<Text>();
 
         bool started = NetworkServer.Listen(4444);
+        NetworkServer.RegisterHandler(MyMessageType.String, OnGuess);
         if (started) {
             colorText.text = "started";
         } else {
             colorText.text = "nope";
         }
 	}
+
+    void OnGuess(NetworkMessage netMsg) {
+        var guessMsg = netMsg.ReadMessage<StringMessage>();
+        string msg = guessMsg.value;
+    }
 
     // Update is called once per frame
 	void Update () {
@@ -91,15 +100,19 @@ public class SomethingListeneer : MonoBehaviour {
             switch (numRightExtended) {
                 case 1:
                     curBlock = (Transform)Instantiate(block, new Vector3(0, 0, 3), Quaternion.identity);
+                    selectedShape = "block";
                     break;
                 case 2:
                     curBlock = (Transform)Instantiate(cylinder, new Vector3(0, 0, 3), Quaternion.identity);
+                    selectedShape = "cylinder";
                     break;
                 case 3:
                     curBlock = (Transform)Instantiate(sphere, new Vector3(0, 0, 3), Quaternion.identity);
+                    selectedShape = "sphere";
                     break;
                 default:
                     curBlock = (Transform)Instantiate(block, new Vector3(0, 0, 3), Quaternion.identity);
+                    selectedShape = "block";
                     break;
             }
             selectedText.text = "Object Selected: True";
@@ -189,7 +202,7 @@ public class SomethingListeneer : MonoBehaviour {
                                     positionText.text = "Position: N/A";
                                     dimensionsText.text = "Dimensions: N/A";
                                     ShapeMessage msg = new ShapeMessage();
-                                    msg.shapeType = "block";
+                                    msg.shapeType = selectedShape;
                                     msg.position = curBlock.transform.position;
                                     msg.rotation = curBlock.transform.rotation;
                                     msg.dimensions = curBlock.transform.localScale;
