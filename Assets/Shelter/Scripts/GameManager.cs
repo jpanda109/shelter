@@ -9,34 +9,29 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     private string[] dictionary = new string[7] { "Pizza", "Squirrel", "Acorn", "Hack", "House", "Dog", "Tree" };
     NetworkClient myClient;
-    public InputField infield;
-
+    GameObject infield = GameObject.FindWithTag("Input");
+    Text testText;
     void Start()
     {
+        Debug.Log("hello");
+        Debug.Log(infield.name);
         myClient = new NetworkClient();
-        myClient.RegisterHandler(MyMessageType.Shape, OnServerReadyToBeginMessage);
-        myClient.RegisterHandler(MsgType.Error, OnError);
+        myClient.RegisterHandler(MyMessageType.Shape, OnShapeMessage);
         myClient.Connect("10.66.175.175", 4444);
-
-
+        testText = GameObject.FindGameObjectWithTag("TestText").GetComponent<Text>();
     }
 
-    void OnServerReadyToBeginMessage(NetworkMessage networkMessage) {
+    void OnShapeMessage(NetworkMessage networkMessage) {
         ShapeMessage msg = networkMessage.ReadMessage<ShapeMessage>();
         Debug.Log("Got a message");
-    }
-
-    void OnError(NetworkMessage netMsg) {
-        Debug.Log("Error");
-    }
-
-    public void OnConnected(NetworkMessage netMsg) {
-        Debug.Log("Connected to server");
+        testText.text = "Got a message";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (testText.text == "New Text" && myClient.isConnected) {
+            testText.text = "connected!";
+        }
     }
 }
