@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         infield.onEndEdit.AddListener(submitName);
         myClient = new NetworkClient();
         myClient.RegisterHandler(MyMessageType.Shape, OnShapeMessage);
-        myClient.Connect("10.66.175.175", 4444);
+        myClient.Connect("127.0.0.1", 4444);
         testText = GameObject.FindGameObjectWithTag("TestText").GetComponent<Text>();
         myClient.RegisterHandler(MyMessageType.Result, onResult);
     }
