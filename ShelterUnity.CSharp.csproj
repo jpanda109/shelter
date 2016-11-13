@@ -132,6 +132,7 @@
     <Compile Include="Assets\LeapMotion\Scripts\VR\LeapVRTemporalWarping.cs" />
     <Compile Include="Assets\LeapMotion\Scripts\VR\TemporalWarpingStatus.cs" />
     <Compile Include="Assets\LeapMotion\Scripts\VR\VRHeightOffset.cs" />
+    <Compile Include="Assets\Shelter\Scripts\GameManager.cs" />
     <Compile Include="Assets\Shelter\Scripts\SomethingListeneer.cs" />
   </ItemGroup>
   <ItemGroup>
