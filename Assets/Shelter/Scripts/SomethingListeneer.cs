@@ -43,11 +43,12 @@ public class SomethingListeneer : MonoBehaviour {
     Text positionText;
     Text dimensionsText;
     Text colorText;
+    Text guessText;
     int rotationIndex = 0;
 
     // Use this for initialization
 
-    string[] dictionary = new string[7] { "Pizza", "Squirrel", "Acorn", "Hack", "House", "Dog", "Tree" };
+    string[] dictionary = new string[5] { "House", "Tree", "Chair", "Desk", "Turtle" };
     string drawing;
     public Text word;
 
@@ -61,6 +62,7 @@ public class SomethingListeneer : MonoBehaviour {
         positionText = GameObject.FindWithTag("PositionText").GetComponent<Text>();
         dimensionsText = GameObject.FindWithTag("DimensionsText").GetComponent<Text>();
         colorText = GameObject.FindWithTag("ColorText").GetComponent<Text>();
+        guessText = GameObject.FindWithTag("GuessText").GetComponent<Text>();
 
         bool started = NetworkServer.Listen(4444);
         NetworkServer.RegisterHandler(MyMessageType.String, OnGuess);
@@ -73,6 +75,7 @@ public class SomethingListeneer : MonoBehaviour {
 
     void checkGuess(string guess)
     {
+        guessText.text = "Currently Guessing: " + guess;
         if (guess == drawing)
         {
             NetworkServer.SendToAll(MyMessageType.Result, new StringMessage("success"));
