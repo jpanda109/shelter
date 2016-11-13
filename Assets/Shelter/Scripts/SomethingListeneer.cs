@@ -50,7 +50,12 @@ public class SomethingListeneer : MonoBehaviour {
         dimensionsText = GameObject.FindWithTag("DimensionsText").GetComponent<Text>();
         colorText = GameObject.FindWithTag("ColorText").GetComponent<Text>();
 
-        NetworkServer.Listen(4444);
+        bool started = NetworkServer.Listen(4444);
+        if (started) {
+            colorText.text = "started";
+        } else {
+            colorText.text = "nope";
+        }
 	}
 
     // Update is called once per frame
@@ -183,6 +188,7 @@ public class SomethingListeneer : MonoBehaviour {
                                     msg.rotation = curBlock.transform.rotation;
                                     msg.dimensions = curBlock.transform.localScale;
                                     NetworkServer.SendToAll(MyMessageType.Shape, msg);
+                                    dimensionsText.text = NetworkServer.connections.ToString();
                                     curBlock = null;
                                 } else if (hand.PalmVelocity.x < -1) {
                                     Destroy(curBlock.gameObject);
