@@ -64,11 +64,6 @@ public class SomethingListeneer : MonoBehaviour {
 
         bool started = NetworkServer.Listen(4444);
         NetworkServer.RegisterHandler(MyMessageType.String, OnGuess);
-        if (started) {
-            colorText.text = "started";
-        } else {
-            colorText.text = "nope";
-        }
 	}
 
     void OnGuess(NetworkMessage netMsg) {
@@ -78,7 +73,7 @@ public class SomethingListeneer : MonoBehaviour {
 
     void checkGuess(string guess)
     {
-        if (guess.ToLower() == drawing)
+        if (guess == drawing)
         {
             NetworkServer.SendToAll(MyMessageType.Result, new StringMessage("success"));
             Application.LoadLevel("Victory screen");
