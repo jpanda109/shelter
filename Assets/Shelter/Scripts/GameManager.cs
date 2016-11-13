@@ -11,9 +11,10 @@ public class GameManager : MonoBehaviour
     NetworkClient myClient;
     InputField infield;
     Text testText;
-    Text clock;
+    public Text clock;
 
     double timer;
+    string drawing;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(guess);
     }
-
+        
     void OnShapeMessage(NetworkMessage networkMessage) {
         ShapeMessage msg = networkMessage.ReadMessage<ShapeMessage>();
         Debug.Log("Got a message");
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         }
 
         timer += Time.deltaTime;
+        clock.text = "Time elapsed: " + timer.ToString("#.000");
 
 
     }
